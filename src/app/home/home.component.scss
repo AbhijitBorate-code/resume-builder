@@ -1,0 +1,160 @@
+/* Global Reset for Box Sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Home Section Layout */
+.home-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10%;
+  min-height: 100vh;
+  background: #0d0d19;
+  color: #fff;
+  flex-wrap: wrap;
+  gap: 2rem;
+
+  @media (max-width: 1024px) {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 8% 5%;
+  }
+
+  @media (max-width: 600px) {
+    padding: 6% 3%;
+    gap: 1.5rem;
+  }
+}
+
+/* Intro Text */
+.intro {
+  max-width: 600px;
+  flex: 1;
+
+  h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+
+    @media (max-width: 768px) {
+      font-size: 2.2rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1.8rem;
+    }
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: #ccc;
+    margin-bottom: 20px;
+
+    @media (max-width: 768px) {
+      font-size: 1.1rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 1rem;
+    }
+  }
+
+  p {
+    line-height: 1.6;
+    color: #bbb;
+    margin-bottom: 30px;
+    font-size: 1rem;
+
+    @media (max-width: 768px) {
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+/* Contact Info */
+.contact-info {
+  margin-bottom: 20px;
+
+  p {
+    color: #ccc;
+    margin: 5px 0;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-start;
+
+    @media (max-width: 768px) {
+      justify-content: center;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 0.85rem;
+    }
+  }
+
+  i {
+    color: #3b82f6;
+  }
+}
+
+/* Social Icons */
+.social-icons {
+  display: flex;
+  gap: 15px;
+  justify-content: flex-start;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  a {
+    font-size: 1.3rem;
+    color: #bbb;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #3b82f6;
+    }
+  }
+}
+
+/* Profile Image Section */
+.profile-image {
+  flex: 0 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 0 25px 5px #3b82f6;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      width: 150px;
+      height: 150px;
+    }
+
+    @media (max-width: 480px) {
+      width: 120px;
+      height: 120px;
+    }
+  }
+}

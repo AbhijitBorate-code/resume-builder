@@ -1,0 +1,80 @@
+.projects-section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  color: #000000;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.projects-section h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+p{
+color: #000000;
+}
+
+.subtitle {
+  color: #000000;
+  margin-bottom: 2rem;
+}
+
+.project-card {
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-sizing: border-box;
+  border: 1px solid ;
+  transition: background 0.3s ease;
+}
+
+
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.project-img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+.card-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.card-header i {
+  color: #252525;
+  cursor: pointer;
+}
+
+.project-card p {
+  margin: 10px 0 15px;
+  line-height: 1.5;
+  color: #000000;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 4px 10px;
+  border-radius: 8px;
+  gap: 8px;
+  color: #000000;
+}
+
+.tags span {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #000000;
+}
