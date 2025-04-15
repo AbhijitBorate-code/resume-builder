@@ -1,80 +1,128 @@
 .projects-section {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 40px 20px;
-  color: #000000;
   font-family: 'Segoe UI', sans-serif;
+  color: #000;
 }
 
-.projects-section h2 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
+.projects-section h1 {
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2.5rem;
 }
 
-p{
-color: #000000;
-}
-
-.subtitle {
-  color: #000000;
-  margin-bottom: 2rem;
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
 }
 
 .project-card {
-  padding: 20px;
   border-radius: 12px;
-  margin-bottom: 20px;
-  box-sizing: border-box;
-  border: 1px solid ;
-  transition: background 0.3s ease;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.project-card:hover {
+  transform: translateY(-6px);
 }
-.project-img {
+
+.image-container {
+  position: relative;
   width: 100%;
-  height: auto;
-  border-radius: 10px;
-  margin-bottom: 15px;
+  height: 200px;
+  overflow: hidden;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-
-.card-header h3 {
-  margin: 0;
-  font-size: 1.2rem;
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
 }
 
-.card-header i {
-  color: #252525;
-  cursor: pointer;
+.image-container:hover .overlay {
+  opacity: 1;
 }
 
-.project-card p {
-  margin: 10px 0 15px;
-  line-height: 1.5;
-  color: #000000;
+.overlay a {
+  color: #fff;
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.project-content {
+  padding: 20px;
+}
+
+.project-content h3 {
+  margin: 0 0 10px;
+  font-size: 1.3rem;
+}
+
+.project-content p {
+  font-size: 0.95rem;
+  color: #444;
+  margin-bottom: 15px;
 }
 
 .tags {
   display: flex;
   flex-wrap: wrap;
-  padding: 4px 10px;
-  border-radius: 8px;
-  gap: 8px;
-  color: #000000;
+  gap: 10px;
 }
 
 .tags span {
-  background: rgba(0, 0, 0, 0.1);
-  padding: 4px 10px;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  color: #000000;
+  background: #f0f0f0;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+@media screen and (max-width: 480px) {
+  .projects-section {
+    padding: 20px 10px;
+  }
+
+  .project-content {
+    padding: 15px;
+  }
+
+  .project-content h3 {
+    font-size: 1.1rem;
+  }
+
+  .project-content p {
+    font-size: 0.85rem;
+  }
+
+  .tags span {
+    font-size: 0.75rem;
+    padding: 4px 10px;
+  }
+
+  .image-container {
+    height: 180px;
+  }
+
+  .overlay a {
+    font-size: 1.3rem;
+  }
 }
