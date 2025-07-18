@@ -1,21 +1,18 @@
-FROM debian:trixie-backports
+# Use official Node.js image
+FROM node:18
 
-# Always good practice
-RUN apt-get update && apt-get upgrade -y
-
-# Optional: Install Node.js manually from NodeSource (example for Node 18)
-RUN apt-get install -y curl gnupg \
-  && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
-  && apt-get install -y nodejs
-
-# Install any build tools needed for React
-RUN apt-get install -y git build-essential
-
-# Copy your React code and build it
+# Set working directory
 WORKDIR /app
+
+# Install dependencies
+COPY package*.json ./
+RUN npm install
+
+# Copy rest of the project
 COPY . .
 
-RUN npm install
-RUN npm run build
+# Expose port (React default is 3000)
+EXPOSE 3000
 
-# Optional: use nginx or serve if you're deploying a static build
+# Start React dev server
+CMD ["npm", "start"]
