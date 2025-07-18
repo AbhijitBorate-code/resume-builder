@@ -1,23 +1,21 @@
-# Use latest stable Node.js version
-FROM node:current
+FROM debian:trixie-backports
 
-# Create app directory inside container
+# Always good practice
+RUN apt-get update && apt-get upgrade -y
+
+# Optional: Install Node.js manually from NodeSource (example for Node 18)
+RUN apt-get install -y curl gnupg \
+  && curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
+  && apt-get install -y nodejs
+
+# Install any build tools needed for React
+RUN apt-get install -y git build-essential
+
+# Copy your React code and build it
 WORKDIR /app
-
-# Copy package.json and package-lock.json (if exists)
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install
-
-# Copy the rest of your app
 COPY . .
 
-# Build the app (optional, if you have a build step)
+RUN npm install
 RUN npm run build
 
-# Expose port (adjust to your app, e.g., 3000 or 8080)
-EXPOSE 3000
-
-# Start the app (ensure you have "start" script in package.json)
-CMD ["npm", "start"]
+# Optional: use nginx or serve if you're deploying a static build
