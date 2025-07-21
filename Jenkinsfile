@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   environment {
-    IMAGE_NAME = 'abhijitborate/resume-app'
+    IMAGE_NAME = 'abhijitborate-code/resume-app'
     IMAGE_TAG = 'latest'
   }
 
@@ -13,7 +13,7 @@ pipeline {
       }
     }
 
-    stage('Install Dependencies & Build Angular') {
+    stage('Install & Build Angular App') {
       steps {
         sh 'npm install -g @angular/cli'
         sh 'npm install'
@@ -27,26 +27,19 @@ pipeline {
       }
     }
 
-    stage('Docker Push') {
+    stage('Docker Push to DockerHub') {
       steps {
-        withCredentials([usernamePassword(
-          credentialsId: 'dockerhub-creds',
-          usernameVariable: 'DOCKER_USER',
-          passwordVariable: 'DOCKER_PASS'
-        )]) {
+        withCredentials([
+          usernamePassword(
+            credentialsId: 'dockerhubcreds',
+            usernameVariable: 'DOCKER_USER',
+            passwordVariable: 'DOCKER_PASS'
+          )
+        ]) {
           sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
           sh 'docker push $IMAGE_NAME:$IMAGE_TAG'
         }
       }
-    }
-  }
-
-  post {
-    success {
-      echo '✅ Deployment successful!'
-    }
-    failure {
-      echo '❌ Build or Push failed.'
     }
   }
 }
