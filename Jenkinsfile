@@ -7,9 +7,9 @@ pipeline {
   }
 
   stages {
-    stage('Checkout') {
+    stage('Clone Git Repository') {
       steps {
-        checkout scm
+        git url: 'https://github.com/AbhijitBorate-code/resume-builder.git', branch: 'main'
       }
     }
 
@@ -30,12 +30,23 @@ pipeline {
             passwordVariable: 'DOCKER_PASS'
           )
         ]) {
-          sh '''
-            echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-            docker push $IMAGE_NAME:$IMAGE_TAG
-          '''
+          script {
+            sh '''
+              echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+              docker push $IMAGE_NAME:$IMAGE_TAG
+            '''
+          }
         }
       }
+    }
+  }
+
+  post {
+    success {
+      echo '✅ Build and push successful!'
+    }
+    failure {
+      echo '❌ Build or push failed!'
     }
   }
 }
