@@ -1,9 +1,12 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'node:20' // Use latest Node.js image with npm
+    }
+  }
 
   environment {
-    IMAGE_NAME = 'abhijitborate-code/resume-app'
-    IMAGE_TAG = 'latest'
+    DOCKER_USER = credentials('dockerhubcreds')
   }
 
   stages {
@@ -15,6 +18,8 @@ pipeline {
 
     stage('Install & Build Angular App') {
       steps {
+        sh 'node -v'
+        sh 'npm -v'
         sh 'npm install -g @angular/cli'
         sh 'npm install'
         sh 'ng build --configuration production'
@@ -23,21 +28,18 @@ pipeline {
 
     stage('Docker Build') {
       steps {
-        sh 'docker build -t $IMAGE_NAME:$IMAGE_TAG .'
+        sh 'docker build -t resume-app .'
       }
     }
 
     stage('Docker Push to DockerHub') {
       steps {
-        withCredentials([
-          usernamePassword(
-            credentialsId: 'dockerhubcreds',
-            usernameVariable: 'DOCKER_USER',
-            passwordVariable: 'DOCKER_PASS'
-          )
-        ]) {
-          sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
-          sh 'docker push $IMAGE_NAME:$IMAGE_TAG'
+        withCredentials([usernamePassword(credentialsId: 'dockerhubcreds', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+          sh '''
+            echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+            docker tag resume-app $DOCKER_USERNAME/resume-app
+            docker push $DOCKER_USERNAME/resume-app
+          '''
         }
       }
     }
